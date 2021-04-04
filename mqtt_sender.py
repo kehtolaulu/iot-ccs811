@@ -2,6 +2,7 @@ import json
 
 from paho.mqtt.client import Client
 from subscriber import Subscriber
+from datetime import datetime
 
 
 class MqttSender(Subscriber):
@@ -11,4 +12,6 @@ class MqttSender(Subscriber):
 
 
     def on_next(self, message: dict):
-        self.client.publish(self.topic, json.dumps(message))
+        json_message = json.dumps(message)
+        print(f'[{datetime.now().isoformat()}] Sending: {json_message}')
+        self.client.publish(self.topic, json_message)

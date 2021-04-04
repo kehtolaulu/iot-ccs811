@@ -2,10 +2,13 @@
 
 import busio
 import adafruit_ccs811
+import paho.mqtt.client as mqtt
 
 from board import SCL, SDA
 from os import environ as env
 from paho.mqtt.client import Client
+from ccs811eco2 import Css811Eco2
+from mqtt_sender import MqttSender
 
 
 def get_eco2() -> Css811Eco2:
@@ -19,7 +22,7 @@ def get_mqtt_sender() -> MqttSender:
         raise Exception("Error connecting to MQTT!")
 
     client_id = env.get('BROKER_CLIENT_ID')
-    host, port = env.get('BROKER_HOST'), env.get('BROKER_PORT')
+    host, port = env.get('BROKER_HOST'), int(env.get('BROKER_PORT'))
     username, password = env.get('BROKER_CLIENT_USERNAME'), env.get('BROKER_CLIENT_PASSWORD')
     topic = env.get('BROKER_TOPIC')
 
@@ -31,7 +34,7 @@ def get_mqtt_sender() -> MqttSender:
 
     client.on_connect = raise_on_error
     client.connect(host, port)
-    return MqttSender(client,)
+    return MqttSender(client, topic)
 
 if __name__ == '__main__':
     eco2 = get_eco2()

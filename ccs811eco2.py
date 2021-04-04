@@ -3,8 +3,9 @@ import time
 from observable import Observable
 
 
-class Css811Eco2(Observable):
+class Css811Eco2:
     def __init__(self, ccs811, interval):
+        self.observable = Observable()
         self.ccs811 = ccs811
         self.interval = interval
 
@@ -16,7 +17,13 @@ class Css811Eco2(Observable):
         while True:
             try:
                 eco2 = self.ccs811.eco2
+            except:
+                pass
             else:
-                self.on_next({ 'eco2': eco2 })
+                self.observable.next({ 'eco2': eco2 })
             finally:
-                time.sleep(interval)
+                time.sleep(self.interval)
+
+
+    def subscribe(self, subscriber):
+        self.observable.subscribe(subscriber)

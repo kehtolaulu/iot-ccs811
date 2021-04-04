@@ -5,7 +5,7 @@ class Observable:
     def __init__(self):
         self.subscribers = []
 
-    def subscribe(subscriber: Subscriber):
+    def subscribe(self, subscriber: Subscriber):
         self.subscribers.append(subscriber)
 
     def unsubscribe(self, subscriber: Subscriber):
