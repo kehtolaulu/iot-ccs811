@@ -1,0 +1,16 @@
+from subscriber import Subscriber
+
+
+class Observable:
+    def __init__(self):
+        self.subscribers = []
+
+    def subscribe(subscriber: Subscriber):
+        self.subscribers.append(subscriber)
+
+    def unsubscribe(self, subscriber: Subscriber):
+        self.subscribers.remove(subscriber)
+
+    def next(self, message):
+        for subscriber in self.subscribers:
+            subscriber.on_next(message)
