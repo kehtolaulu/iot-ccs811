@@ -16,11 +16,16 @@ class Ccs811Eco2:
     def run(self):
         while True:
             try:
-                eco2 = self.ccs811.eco2
+                data = {
+                    'eco2': self.ccs811.eco2,
+                    'temperature': self.ccs811.temperature,
+                    'temp_offset': self.ccs811.temp_offset,
+                    'tvoc': self.ccs811.tvoc
+                }
             except:
                 pass
             else:
-                self.observable.next({ 'eco2': eco2 })
+                self.observable.next(data)
             finally:
                 time.sleep(self.interval)
 

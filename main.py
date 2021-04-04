@@ -7,6 +7,7 @@ import paho.mqtt.client as mqtt
 from board import SCL, SDA
 from os import environ as env
 from paho.mqtt.client import Client
+
 from ccs811eco2 import Ccs811Eco2
 from mqtt_sender import MqttSender
 
@@ -35,6 +36,7 @@ def get_mqtt_sender() -> MqttSender:
     client.on_connect = raise_on_error
     client.connect(host, port)
     return MqttSender(client, topic)
+
 
 if __name__ == '__main__':
     eco2 = get_eco2()
