@@ -8,9 +8,6 @@ class Observable:
     def subscribe(self, subscriber: Subscriber):
         self.subscribers.append(subscriber)
 
-    def unsubscribe(self, subscriber: Subscriber):
-        self.subscribers.remove(subscriber)
-
     def next(self, message):
         for subscriber in self.subscribers:
             subscriber.on_next(message)

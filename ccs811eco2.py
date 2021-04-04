@@ -3,7 +3,7 @@ import time
 from observable import Observable
 
 
-class Css811Eco2:
+class Ccs811Eco2:
     def __init__(self, ccs811, interval):
         self.observable = Observable()
         self.ccs811 = ccs811

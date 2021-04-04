@@ -7,14 +7,14 @@ import paho.mqtt.client as mqtt
 from board import SCL, SDA
 from os import environ as env
 from paho.mqtt.client import Client
-from ccs811eco2 import Css811Eco2
+from ccs811eco2 import Ccs811Eco2
 from mqtt_sender import MqttSender
 
 
-def get_eco2() -> Css811Eco2:
+def get_eco2() -> Ccs811Eco2:
     i2c = busio.I2C(SCL, SDA)
     ccs811 = adafruit_ccs811.CCS811(i2c)
-    return Css811Eco2(ccs811, 0.5)
+    return Ccs811Eco2(ccs811, 1)
 
 
 def get_mqtt_sender() -> MqttSender:
